@@ -1,0 +1,896 @@
+html {
+  box-sizing: border-box;
+  /* border-box - благодаря этому значению не портится геометрия проэкта:) */
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  /* inherit- озн. наследует значение */
+}
+
+ul,
+a {
+  list-style: none;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.body {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.2;
+  color: #102746;
+  font-style: normal;
+}
+
+.container {
+  max-width: 1040px;
+  padding: 0 10px;
+  margin: 0 auto;
+}
+
+.wrapper-full {
+  max-width: 1262px;
+  padding: 0 10px;
+  margin: 0 auto;
+  margin-bottom: 135px;
+}
+
+.section__title {
+  font-family: "Lato", sans-serif;
+  font-weight: 500;
+  font-size: 35px;
+  line-height: 42px;
+  color: #102746;
+  padding-bottom: 10px;
+  position: relative;
+}
+
+.section__title::after {
+  content: "";
+  border-bottom: 2px solid #006dfe;
+  width: 250px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  /* position: fixed;top: 0;left: 0;width: 100%; - этто для того что бы меню скролилось указывается для хедера. с такими параметрами хедер не занимает место бекграунд применится без учета навигации*/
+  transition: 0.2s linear;
+  padding-bottom: 20px;
+  z-index: 999;
+  /* transition: .2s linear; это что бы при скроле бекграунд плавно выходил
+  padding-bottom: 20px; - это что бы бекграунд красиво смотрелся добавил не по макету
+  z-index: 999; - это подключаем что бы при скроле header был по верх остальных окон 999 - полюбому будет */
+}
+
+.header_active {
+  background: #0e1d28;
+  /* header_active это т клас добавили для js он добавляется при скроле чернеет бекграунм меню */
+}
+
+.header__wrapper {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  align-items: flex-end;
+  margin-top: 56px;
+}
+
+.nav-item {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.nav-item-list {
+  font-family: "Lato", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.nav-item-list + .nav-item-list {
+  margin-left: 80px;
+}
+
+.nav-item-list-link {
+  color: #fff;
+}
+
+.nav-item-list:hover,
+.nav-item-list:focus,
+.nav-item-list:active {
+  opacity: 0.75;
+  /* .nav-item-list:focus, - что бы менялось при нажатии  таба  */
+}
+
+.header__burger {
+  display: none;
+  /* display: none;- этим свойством мы его прячем до адаптива */
+  width: 40px;
+  /* width: 40px; - это ширина нашего бургер меню */
+  height: 28px;
+  /* height: 28px; - это высота нашего бургер меню */
+  position: relative;
+  /* position: relative; - прописуем для позиу=ционирования черточек */
+}
+
+.burger__line {
+  display: block;
+  /* display: block; - потому что span это строчный элемент */
+  width: 100%;
+  /* width: 100%; - означает что ширина полосочки будет 40px как и указали выше в header__burger */
+  height: 2px;
+  /* height: 2px; - это толщина полоски */
+  background-color: #fff;
+  position: absolute;
+  /* position: absolute; - это указываем для наших черточек что бы их позиционировать */
+  left: 0;
+  /* left: 0; - прописуе что бы выровнять относительно какойто стороны */
+}
+
+.burger__line-first {
+  top: 0;
+  /* верхняя черта */
+}
+
+.burger__line-second {
+  top: 50%;
+  transform: translateY(-50%);
+  /* по середине черта */
+}
+
+.burger__line-third {
+  bottom: 0;
+  /* черта отправляется вниз */
+}
+
+.intro {
+  min-height: 100vh;
+  /* min-height: - пиши мин что бы контент не вылазил если его станет в будущем больше */
+  background: url("../img/intro-bg.jpg") no-repeat center;
+  background-size: cover;
+  /* background-size: cover; - озн что будет покрывать всю площадь страциы при любых размерах */
+}
+
+.intro__wrapper {
+  padding-top: 263px;
+}
+
+.intro__wrapper-content {
+  max-width: 619px;
+}
+
+.intro__title {
+  font-family: "Lato", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 50px;
+  line-height: 60px;
+  color: #fff;
+}
+
+.intro__title {
+  margin-bottom: 22px;
+}
+
+.intro__text {
+  font-family: "Lato", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #fff;
+  margin-bottom: 59px;
+}
+
+.intro-filter__content-label {
+  font-family: "Lato", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  color: #fff;
+}
+
+/* form ниже */
+
+.search__form-info {
+  display: flex;
+  /* display: flex; - задаем что бы отступы междк рамками пропали */
+  flex-wrap: wrap;
+  margin-bottom: 149px;
+}
+
+.search-form__field {
+  /* это тег поля инпут. инпуту нельзя прилепить афтер и бефор. толко вырезаем и вставляем кружочек */
+  /* transparent - делаем прозрачным поле ввода */
+  background: transparent url("/img/content/circle-search.svg") no-repeat left
+    6px;
+  /* можно писать и топ и центер итд . и кружок буден двигаться */
+  background-size: 20px;
+  border: 0;
+  border-bottom: 2px solid #bfc0c5;
+  margin-right: 60px;
+  width: 297px;
+  padding-left: 43px;
+  padding-bottom: 22px;
+  font-weight: 500;
+  font-size: 18px;
+  color: #fff;
+}
+
+.search-form__field::placeholder {
+  /* .search-form__field::placeholder - это делаем что бы placeholder не был прозрачным */
+  font-weight: 500;
+  font-size: 18px;
+  color: #fff;
+}
+
+.search-form__submit {
+  padding: 15px 36px;
+  text-transform: uppercase;
+  color: #fff;
+  background: #1b7dff;
+  border: 0;
+  font-weight: 500;
+  font-size: 24px;
+  transition: all 0.5s;
+}
+
+.search-form__submit:hover,
+.search-form__submit:focus,
+.search-form__submit:active {
+  /* это прописуем что бы при нажатии н а таб подсвечивалась кнопка и при нажатии то же светилась */
+  color: #1b7dff;
+  background: #fff;
+}
+
+.benefits {
+  margin-bottom: 131px;
+}
+
+.benefits__wrap {
+  max-width: 1262px;
+  padding: 0 10px;
+  margin: 0 auto;
+  background-color: #fff;
+  box-shadow: 0px 2px 20px rgba(21, 24, 36, 0.15993);
+  /* box-shadow: 0px 2px 20px rgba(21, 24, 36, 0.15993) -это тень у блока */
+  position: relative;
+}
+
+.benefits__title {
+  width: 100%;
+  /* width: - обычно прописывается в начале */
+  font-family: "Lato", sans-serif;
+  font-weight: 500;
+  font-size: 35px;
+  line-height: 42px;
+  color: #102746;
+  padding: 93px 100px 88px 120px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: translateY(-100%);
+  /* позиционируем этим наезд на верхнюю секцию. один  из метедов */
+  background-color: #fff;
+}
+
+.benefits__wrap-icon {
+  max-width: 66px;
+  height: 66px;
+  margin-bottom: 37px;
+}
+
+.benefits__wrap-subtitle {
+  font-family: "Lato", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  color: #000000;
+  margin-bottom: 26px;
+}
+
+.benefits__cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-column-gap: 55px;
+  padding: 0 120px;
+  padding-bottom: 112px;
+}
+
+.benefits__card {
+  grid-column: span 1;
+  /* grid-column: span 1; - это что бы карточки занимали по одноц калонке вместо ширины */
+  margin-bottom: 112px;
+}
+
+.benefits__wrap-text {
+  font-family: "Lato", sans-serif;
+  color: #000;
+  margin-bottom: 39px;
+  max-width: 317px;
+}
+
+.benefits__wrap-link {
+  font-family: "Lato", sans-serif;
+  display: inline-block;
+  /* display: inline-block - что бы стрелочка появилась без афтера */
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  color: #006dfe;
+  padding-right: 59px;
+  background: url("../img/content/arrow-right.svg") no-repeat 95% center;
+  transform: 0.2s all;
+}
+
+.benefits__wrap-link:hover,
+.search-form__submit:focus,
+.search-form__submit:active {
+  /* запятая ОБЯЗАТЕЛЬНО */
+  background: url("../img/content/arrow-right.svg") no-repeat right center;
+}
+
+.places {
+  margin-bottom: 131px;
+}
+
+.places__header {
+  margin-bottom: 36px;
+}
+
+.places__content {
+  max-width: 1262px;
+  padding: 0 10px;
+  margin: 0 auto;
+}
+
+.places__caption {
+  display: flex;
+  justify-content: space-between;
+  /* text-align: center; */
+  align-items: center;
+  flex-wrap: wrap;
+  /* flex-wrap: wrap- для безопасности. когда контейнер будет уменьшаться меню будет преносится */
+  margin-bottom: 36px;
+}
+
+.places__title {
+  margin-right: 15px;
+}
+
+.places__view-all {
+  font-family: "Lato", sans-serif;
+  display: inline-block;
+  /* display: inline-block - что бы стрелочка появилась без афтера */
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  color: #006dfe;
+  padding-right: 59px;
+  background: url("../img/content/arrow-right.svg") no-repeat right center;
+}
+
+.places__view-all:hover,
+.places__view-all:focus {
+  opacity: 0.65;
+}
+
+/* 
+.places__baners,
+.places__baners-inner {
+  display: flex;
+} */
+
+.places__cards {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-column-gap: 10px;
+  /* grid-gap: 10px; - это отступы в гридах */
+  grid-row-gap: 10px;
+}
+
+.places__card-size-lg {
+  grid-column: span 3;
+  /* grid-column: span 3; - хотим чтобы кортинк занимала три колонки */
+}
+
+.places__card-size-sm {
+  grid-column: span 2;
+  /* grid-column: span 2; - хотим чтобы кортинк занимала три колонки */
+}
+
+.places__card-pic {
+  width: 100%;
+  transition: 0.15s all;
+}
+
+.places__card-pic-size-lg {
+  height: 354px;
+  object-fit: cover;
+  /* object-fit: cover; - при адаптации обрезается изображение с боков оставляя середину */
+}
+
+.places__card-pic-size-sm {
+  height: 283px;
+}
+
+.places__card {
+  position: relative;
+  overflow: hidden;
+  /* overflow: hidden; - что бы изображения не вылазили за пределы при увеличении */
+}
+
+.places__card:hover .places__card-pic {
+  transform: scale(1.05);
+  /* transform: scale(1.05); - это типа афтера и бефора всплывает изображение при наведении мышы */
+}
+
+.places__card::after {
+  display: block;
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(21, 24, 36, 0.4);
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+
+.places__card-title {
+  font-size: 50px;
+  line-height: 60px;
+  color: #fff;
+  position: relative;
+  left: 29px;
+  bottom: 27px;
+  z-index: 3;
+}
+
+.places__card-linc {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 4;
+  /* z-index: 4; - выводим ссылку так что бы картинуа была кликабельной */
+}
+
+/* prefecture start */
+
+.tours {
+  margin-bottom: 139px;
+}
+
+.tours__tour {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-column-gap: 108px;
+  /* grid-gap: 0 108px; - это маржин по гридам /
+  нада писать - grid-column-gap потому что grid-gap - не валидно писать*/
+  align-items: center;
+}
+
+.tour__info {
+  padding-left: 47px;
+}
+
+.tour__title {
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 40px;
+  color: #102746;
+  margin-bottom: 85px;
+}
+
+.tour__desc {
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  color: #102746;
+  margin-bottom: 58px;
+}
+
+.tour__more {
+  font-family: "Lato", sans-serif;
+  display: inline-block;
+  /* display: inline-block - что бы стрелочка появилась без афтера */
+  font-weight: normal;
+  text-transform: uppercase;
+  font-size: 16px;
+  line-height: 24px;
+  color: #006dfe;
+  padding-right: 59px;
+  background: url("../img/content/arrow-right.svg") no-repeat 95% center;
+  transform: 0.2s all;
+}
+
+.tour__more:hover,
+.tour__more:focus,
+.tour__more:active {
+  /* запятая ОБЯЗАТЕЛЬНО */
+  background: url("../img/content/arrow-right.svg") no-repeat right center;
+}
+
+.tours__tour {
+  margin-bottom: 77px;
+}
+
+/* Top start */
+.top__card {
+  margin-bottom: 58px;
+}
+
+.top__title {
+  margin-bottom: 54px;
+}
+
+.top__cards {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  /* grid-gap: 0 108px; */
+  grid-column-gap: 52px;
+  grid-row-gap: 52px;
+}
+
+.top__card {
+  display: flex;
+  flex-direction: column;
+  /* flex-direction: column; - это свойство добавляем карточке что бы при добавлении текста кнопки не прыгали . но работает вмсте со свойствами кнопки margin: auto 0 0 0 и width:; */
+  grid-column: span 2;
+}
+
+.top__card-pic {
+  margin-bottom: 45px;
+  position: relative;
+}
+
+.top__card-stats {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  position: absolute;
+  width: 100%;
+  /* width: 100% - ширину добавил сразу разлетелись элементы */
+  padding: 15px 25px;
+  left: 0;
+  bottom: 0;
+  background: rgba(21, 24, 36, 0.6);
+}
+
+.top__card-title {
+  font-family: "Lato", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  color: #ffffff;
+  margin: 0 auto 0 0;
+}
+
+.top__card-likes {
+  font-family: "Lato", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: #fff;
+  margin-right: 14px;
+}
+
+.top__card-coments {
+  font-family: "Lato", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: #fff;
+}
+
+.top__card-likes-value {
+  padding-right: 20px;
+  background: url("../img/content/likes-heart.svg") no-repeat right;
+}
+
+.top__card-coments-value {
+  padding-right: 23px;
+  background: url("../img/content/sms.svg") no-repeat right;
+}
+
+.top__card-desc {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #102746;
+  margin-bottom: 31px;
+}
+
+.top__card-more {
+  width: 128px;
+  /* width: 118px; - задаем фиксированую ширину кнопке . лучше конечно ее обернуть в контейнер отдельный. это для того что бы при увеличении контента наша кнопка не меняла позицию. в верху зададим карточке свойство и также margin: auto 0 0 0 ; */
+  font-family: "Lato", sans-serif;
+  text-transform: uppercase;
+  padding: 12px 19px;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 19px;
+  color: #ffffff;
+  background-color: #006dfe;
+  transition: 0.15s all;
+  margin: auto 0 0 0;
+  /* margin: auto 0 0 0 ; это свойство прижимает кнопку к низу когда карточку меняет текст когда его много */
+}
+
+.top__card-more:hover,
+.top__card-more:focus,
+.top__card-more:active {
+  color: #1b7dff;
+  background: #fff;
+}
+
+.top {
+  margin-bottom: 86px;
+}
+
+/* videos start */
+
+.videos {
+  width: 100%;
+}
+
+.videos__wraperr {
+  max-width: 1440px;
+  margin: 0 auto;
+  position: relative;
+  /* position: relative; - это прописуем для того что бы позиционировать встроеное видео */
+}
+
+.video__item {
+  padding-top: 56.25%;
+}
+
+.video__element {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* footer start  */
+
+.footer {
+  background: #0e1d28;
+  padding: 119px 0;
+}
+
+.footer__item {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.footer__logo {
+  width: 50%;
+  /* width: 50% - задаем для логотипа и освобождаем место для навигации */
+}
+
+.footer__nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 50%;
+}
+
+.footer__manu-title {
+  font-family: "Lato", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  color: #fff;
+}
+
+.footer__manu-link {
+  /* в студиях конечно же linki не стилизуют . стилизуют только li */
+  font-family: "Lato", sans-serif;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  color: #fff;
+}
+
+.footer__manu-link:hover,
+.footer__manu-link:focus,
+.footer__manu-link:active {
+  opacity: 0.75;
+  /* это прозрачность */
+  cursor: pointer;
+}
+
+@media screen and (max-width: 960px) {
+  .benefits {
+    margin-bottom: 75px;
+  }
+  .search-form__field {
+    margin-bottom: 25px;
+    /* это для того потому что кнопка перескакивает что бы не прилипала */
+  }
+  .benefits__cards {
+    padding: 0 15px;
+    grid-column-gap: 35px;
+  }
+  .benefits__card {
+    margin-bottom: 60px;
+  }
+  .benefits__title {
+    padding: 55px 15px;
+  }
+  .benefits__wrap {
+    box-shadow: none;
+  }
+  .places__card-size-lg {
+    grid-column: span 6;
+    /* column-gap: span 6; - озн что ширина картинки 100% на всю штрину экрана */
+  }
+
+  .places__card-size-sm {
+    grid-column: span 6;
+  }
+  .tours__tour {
+    grid-column-gap: 35px;
+  }
+  .tour__info {
+    padding: 0;
+    /* padding: 0; - обнуляем падинг что бы прижать к краю контейнера */
+  }
+  .tour__title {
+    margin-bottom: 10px;
+  }
+  .tour__desc {
+    margin-bottom: 47px;
+  }
+  .top__cards {
+    grid-column-gap: 25px;
+    grid-row-gap: 55px;
+  }
+  .top__card {
+    grid-column: span 3;
+    margin-bottom: 45px;
+  }
+  .top__card-pic {
+    margin-bottom: 40px;
+  }
+  .footer {
+    padding: 70px 25px;
+  }
+  .footer__manu {
+    margin-left: -60px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .header__burger {
+    display: block;
+  }
+  .header__nav {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    /* position: fixed; -что бы работал бургер затемнение w100%  и h100% */
+    top: 0;
+    left: 0;
+    background-color: #000;
+    z-index: 10;
+    padding: 75px;
+    transform: translateX(100%);
+    /* transform: translateX(100%); - сдвигает меню чтобы его не было за пределя страницы. в право. если пропишем минус -100% то сдвинется влево */
+    transition: 0.2s all linear;
+    /* transition: .2s; - это что бы плавно меню выходило с боку */
+  }
+
+  .header__nav_active {
+    /* этот клас мы прписали что бы при нажатии на крестик значение  transform: translateX(0); меняялось на ноль */
+    transform: translateX(0);
+  }
+
+  .nav-item-list {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 30px;
+  }
+
+  .nav-item-list:last-child {
+    margin-bottom: 0;
+    /* margin-bottom: 0; - у последнего элемента обнуляем ботом */
+  }
+
+  .nav-item-list-link {
+    font-size: 42px;
+    line-height: 48px;
+    /* font-size: 42px; line-height: 28px;- это задаем что бы при адаптиве меню было крупнее становилось */
+  }
+
+  .header__nav-close {
+    /* .header__nav-close - это контейнер для крестика при  адаптиве который закрывает выпадающее меню */
+    width: 40px;
+    height: 40px;
+    position: relative;
+    top: 20px;
+    right: 20px;
+    z-index: 11;
+    /* z-index: 11; - что бы было видно крестик над всеми окнами */
+  }
+
+  .header__nav-close-line {
+    /* это линия крестика оторый закрывает выпадающее меню */
+    position: absolute;
+    width: 100%;
+    display: block;
+    /* display: block; - span - это сторочный элемент превращаем в блочный */
+    background-color: #fff;
+    height: 2px;
+    top: 50px;
+  }
+
+  .header__nav-close-line:first-child {
+    /* .header__nav-close-line:first-child  - озн. берем первую черту */
+    transform: translateY(-50%) rotate(45deg);
+    /* rotate(45deg); - поворачиваем ее на 45 процентов что бы получися крестик */
+  }
+
+  .header__nav-close-line:last-child {
+    /* .header__nav-close-line:last-child  - озн. берем последнюю черту */
+    transform: translateY(-50%) rotate(-45deg);
+    /* rotate(45deg); - поворачиваем ее на минус -45 процентов в другую сторону. что бы получися крестик */
+  }
+  .header {
+    top: -40px;
+  }
+  .intro__wrapper {
+    padding-top: 90px;
+  }
+  .intro__title {
+    font-size: 32px;
+    font-size: 30px;
+    margin-bottom: 9px;
+    line-height: 40px;
+  }
+  .search-form__field {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 45px;
+  }
+  .intro__text {
+    font-size: 13px;
+    line-height: 19px;
+    margin-bottom: 33px;
+  }
+  .search-form__submit {
+    margin-bottom: 40px;
+  }
+  .search-form__submit {
+    font-size: 16px;
+  }
+
+  .benefits__card {
+    grid-column: span 3;
+  }
+}
+
+/*( https://youtu.be/BnWGA4tJ-2s?t=142 ) */
